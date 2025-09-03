@@ -359,7 +359,7 @@
       let files = imageFiles.length > 0 ? imageFiles : Array.from(input.files);
 
       if (files.length === 0) {
-        alert('請先選擇圖片！');
+        alert('請先選擇圖片！\nPlease select an image first!');
         return;
       }
 
@@ -620,8 +620,8 @@
           document.body.removeChild(link);
         }
       } catch (err) {
-        console.error('下載失敗:', err);
-        alert('無法保存文件，可能是因為瀏覽器不支持或用戶取消了操作。請重試。');
+        console.error('下載失敗:\nDownload failed:', err);
+        alert('無法保存文件，可能是因為瀏覽器不支持或用戶取消了操作。\nUnable to save the file. This might be due to browser incompatibility or user cancellation. Please try again.');
         const link = document.createElement('a');
         link.href = canvasDataUrl;
         link.download = 'merged_image.png';
