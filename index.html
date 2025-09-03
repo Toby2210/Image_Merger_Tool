@@ -41,38 +41,9 @@
 <!DOCTYPE html>
 <html lang="zh-HK">
 <head>
-    <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "免費線上圖片合併工具",
-    "url": "https://Toby2210.github.io/",
-    "description": "使用此工具調整間距、排序並下載合併圖片。支援 JPG/PNG, 無需註冊。",
-    "applicationCategory": "PhotoEditing",
-    "operatingSystem": "All",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
-  }
-  </script>
-  <meta property="og:title" content="免費線上圖片合併工具 - 快速合併多張圖片">
-  <meta property="og:description" content="使用此工具調整間距、排序並下載合併圖片。支援 JPG/PNG, 無需註冊。">
-  <meta property="og:image" content="https://Toby2210.github.io/preview.jpg">
-  <meta property="og:url" content="https://Toby2210.github.io/">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="免費線上圖片合併工具 - 快速合併多張圖片">
-  <meta name="twitter:description" content="使用此工具調整間距、排序並下載合併圖片。支援 JPG/PNG, 無需註冊。">
-  <meta name="twitter:image" content="https://Toby2210.github.io/preview.jpg">
-  <link rel="canonical" href="https://Toby2210.github.io/">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4925437706750304"
-     crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>免費線上圖片合併工具 - 快速合併多張圖片</title>
-  <meta name="description" content="使用此工具調整間距、排序並下載合併圖片。支援 JPG/PNG, 無需註冊。">
-  <meta name="keywords" content="圖片合併, 線上合併圖片, 免費圖片工具"> 
+  <title id="title">圖片合併工具</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -158,24 +129,72 @@
   </style>
 </head>
 <body>
-  <h1>免費線上圖片合併工具</h1>
-  <p>使用此工具調整間距、排序並下載合併圖片。支援 JPG/PNG, 無需註冊。</p>
-  <h2>功能</h2>
-  <ul>
-    <li>合併多張圖片</li>
-    <li>調整圖片間距</li>
-    <li>下載高品質結果</li>
-  </ul>
+  <script>
+    const translations = {
+      "zh-HK": {
+        title: "圖片合併工具",
+        selectLanguage: "選擇語言",
+        imagesPerRow: "每行圖片數量：",
+        rowSpacing: "行間距（像素）：",
+        colSpacing: "列間距（像素）：",
+        mergeAsc: "按名稱正序合併",
+        mergeDesc: "按名稱倒序合併",
+        download: "下載合併圖片",
+        imageInputTitle: "選擇要合併的圖片"
+      },
+      "en": {
+        title: "Image Merger Tool",
+        selectLanguage: "Select Language",
+        imagesPerRow: "Images per row:",
+        rowSpacing: "Row spacing (pixels):",
+        colSpacing: "Column spacing (pixels):",
+        mergeAsc: "Merge by name (ascending)",
+        mergeDesc: "Merge by name (descending)",
+        download: "Download Merged Image",
+        imageInputTitle: "Select images to merge"
+      }
+    };
+  </script>
+<script>
+  let currentLanguage = "zh-HK"; // 預設語言
+
+  function toggleLanguage() {
+    // 切換語言
+    currentLanguage = currentLanguage === "zh-HK" ? "en" : "zh-HK";
+    const translation = translations[currentLanguage];
+
+    // 更新文字內容
+    document.title = translation.title;
+    document.getElementById("titleTitle").textContent = translation.title;
+    document.getElementById("language-label").textContent = translation.selectLanguage;
+    document.getElementById("language-toggle").textContent = currentLanguage === "zh-HK" ? "中文" : "English";
+    document.getElementById("imagesPerRow-label").textContent = translation.imagesPerRow;
+    document.getElementById("rowSpacing-label").textContent = translation.rowSpacing;
+    document.getElementById("colSpacing-label").textContent = translation.colSpacing;
+    document.getElementById("mergeAscButton").textContent = translation.mergeAsc;
+    document.getElementById("mergeDescButton").textContent = translation.mergeDesc;
+    document.getElementById("downloadButton").textContent = translation.download;
+    document.getElementById("imageInput").setAttribute("title", translation.imageInputTitle);
+
+  }
+</script>
+  <div>
+    <div>
+      <label id="language-label">選擇語言</label>
+      <button id="language-toggle" onclick="toggleLanguage()">中文</button>
+    </div>
+  </div>
+  <h1 id="titleTitle">圖片合併工具</h1>
   <div class="button-container">
     <input type="file" id="imageInput" accept="image/*" multiple>
-    <label for="imagesPerRow">每行圖片數量：</label>
+    <label for="imagesPerRow" id="imagesPerRow-label">每行圖片數量：</label>
     <input type="number" id="imagesPerRow" min="0" value="0" title="輸入每行圖片數量（0 表示所有圖片一行）">
-    <label for="rowSpacing">行間距（像素）：</label>
+    <label for="rowSpacing" id="rowSpacing-label">行間距（像素）：</label>
     <input type="number" id="rowSpacing" min="0" value="0" title="輸入行之間的間距">
-    <label for="colSpacing">列間距（像素）：</label>
+    <label for="colSpacing" id="colSpacing-label">列間距（像素）：</label>
     <input type="number" id="colSpacing" min="0" value="0" title="輸入列之間的間距">
-    <button onclick="mergeImages('asc')">按名稱正序合併</button>
-    <button onclick="mergeImages('desc')">按名稱倒序合併</button>
+    <button id="mergeAscButton" onclick="mergeImages('asc')">按名稱正序合併</button>
+    <button id="mergeDescButton" onclick="mergeImages('desc')">按名稱倒序合併</button>
   </div>
   <canvas id="preview"></canvas>
   <button id="downloadButton" onclick="downloadMergedImage()">下載合併圖片</button>
